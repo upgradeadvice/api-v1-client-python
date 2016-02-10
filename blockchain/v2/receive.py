@@ -3,7 +3,10 @@ at https://blockchain.info/api/api_receive
 """
 
 from .. import util
-from urllib import urlencode
+try:
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import urlencode
 import json
 
 class ReceiveResponse:
@@ -23,7 +26,7 @@ class LogEntry:
 
 def receive(xpub, callback, api_key):
     """Call the 'api/receive' endpoint and create a forwarding address.
-    
+
     :param str xpub: extended public key to generate payment address
     :param str callback: callback URI that will be called upon payment
     :param str api_key: Blockchain.info API V2 key
